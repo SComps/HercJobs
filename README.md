@@ -4,7 +4,7 @@
 does not support WinForms applications on linux.  While it's possible to create
 winforms applications on linux using Mono, those applications must be targetted at
 an older version (4.5) of the .NET Framework -- not .NET CORE and above.  As such
-there is no plans to support porting this application to linux or MacOS.</b>
+there are no plans to support porting this application to linux or MacOS.</b>
 
 
 A windows GUI application to submit jobs to a Hercules guest via TCP/IP to a hercules
