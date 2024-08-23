@@ -42,6 +42,7 @@ Partial Class Form1
         ToolStripMenuItem1 = New ToolStripSeparator()
         ExitToolStripMenuItem = New ToolStripMenuItem()
         dlgLoadDeck = New OpenFileDialog()
+        LogBox = New RichTextBox()
         Panel1.SuspendLayout()
         MenuStrip1.SuspendLayout()
         SuspendLayout()
@@ -54,62 +55,69 @@ Partial Class Form1
         Panel1.Controls.Add(DeckList)
         Panel1.Controls.Add(Label1)
         Panel1.Controls.Add(SelectedReader)
-        Panel1.Location = New Point(11, 43)
+        Panel1.Location = New Point(10, 32)
+        Panel1.Margin = New Padding(3, 2, 3, 2)
         Panel1.Name = "Panel1"
-        Panel1.Size = New Size(365, 435)
+        Panel1.Size = New Size(320, 327)
         Panel1.TabIndex = 0
         ' 
         ' RunStop
         ' 
-        RunStop.Location = New Point(243, 43)
+        RunStop.Location = New Point(213, 32)
+        RunStop.Margin = New Padding(3, 2, 3, 2)
         RunStop.Name = "RunStop"
-        RunStop.Size = New Size(94, 29)
+        RunStop.Size = New Size(82, 22)
         RunStop.TabIndex = 4
         RunStop.Text = "Pause"
         RunStop.UseVisualStyleBackColor = True
         ' 
         ' Button1
         ' 
-        Button1.Location = New Point(13, 389)
+        Button1.Location = New Point(11, 292)
+        Button1.Margin = New Padding(3, 2, 3, 2)
         Button1.Name = "Button1"
-        Button1.Size = New Size(94, 29)
+        Button1.Size = New Size(82, 22)
         Button1.TabIndex = 3
         Button1.Text = "Load Deck"
         Button1.UseVisualStyleBackColor = True
         ' 
         ' DeckList
         ' 
+        DeckList.AllowDrop = True
         DeckList.Font = New Font("Segoe UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         DeckList.FormattingEnabled = True
-        DeckList.ItemHeight = 17
-        DeckList.Location = New Point(13, 88)
+        DeckList.ItemHeight = 12
+        DeckList.Location = New Point(11, 66)
+        DeckList.Margin = New Padding(3, 2, 3, 2)
         DeckList.Name = "DeckList"
-        DeckList.Size = New Size(324, 276)
+        DeckList.Size = New Size(284, 208)
         DeckList.TabIndex = 2
         ' 
         ' Label1
         ' 
         Label1.AutoSize = True
-        Label1.Location = New Point(13, 20)
+        Label1.Location = New Point(11, 15)
         Label1.Name = "Label1"
-        Label1.Size = New Size(117, 20)
+        Label1.Size = New Size(90, 15)
         Label1.TabIndex = 1
         Label1.Text = "Selected Reader"
         ' 
         ' SelectedReader
         ' 
         SelectedReader.FormattingEnabled = True
-        SelectedReader.Location = New Point(13, 43)
+        SelectedReader.Location = New Point(11, 32)
+        SelectedReader.Margin = New Padding(3, 2, 3, 2)
         SelectedReader.Name = "SelectedReader"
-        SelectedReader.Size = New Size(212, 28)
+        SelectedReader.Size = New Size(186, 23)
         SelectedReader.TabIndex = 0
         ' 
         ' Panel2
         ' 
         Panel2.BorderStyle = BorderStyle.FixedSingle
-        Panel2.Location = New Point(404, 43)
+        Panel2.Location = New Point(336, 32)
+        Panel2.Margin = New Padding(3, 2, 3, 2)
         Panel2.Name = "Panel2"
-        Panel2.Size = New Size(365, 435)
+        Panel2.Size = New Size(338, 145)
         Panel2.TabIndex = 1
         ' 
         ' MenuStrip1
@@ -118,7 +126,8 @@ Partial Class Form1
         MenuStrip1.Items.AddRange(New ToolStripItem() {SetupToolStripMenuItem})
         MenuStrip1.Location = New Point(0, 0)
         MenuStrip1.Name = "MenuStrip1"
-        MenuStrip1.Size = New Size(784, 28)
+        MenuStrip1.Padding = New Padding(5, 2, 0, 2)
+        MenuStrip1.Size = New Size(686, 24)
         MenuStrip1.TabIndex = 2
         MenuStrip1.Text = "MenuStrip1"
         ' 
@@ -126,68 +135,68 @@ Partial Class Form1
         ' 
         SetupToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {ConfigureHostsToolStripMenuItem, ToolStripMenuItem1, ExitToolStripMenuItem})
         SetupToolStripMenuItem.Name = "SetupToolStripMenuItem"
-        SetupToolStripMenuItem.Size = New Size(61, 24)
+        SetupToolStripMenuItem.Size = New Size(49, 20)
         SetupToolStripMenuItem.Text = "Setup"
         ' 
         ' ConfigureHostsToolStripMenuItem
         ' 
         ConfigureHostsToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {HostsToolStripMenuItem, PrintersToolStripMenuItem, ToolStripMenuItem2, DefaultDevicesToolStripMenuItem})
         ConfigureHostsToolStripMenuItem.Name = "ConfigureHostsToolStripMenuItem"
-        ConfigureHostsToolStripMenuItem.Size = New Size(157, 26)
+        ConfigureHostsToolStripMenuItem.Size = New Size(127, 22)
         ConfigureHostsToolStripMenuItem.Text = "Configure"
         ' 
         ' HostsToolStripMenuItem
         ' 
         HostsToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {CardReadersToolStripMenuItem})
         HostsToolStripMenuItem.Name = "HostsToolStripMenuItem"
-        HostsToolStripMenuItem.Size = New Size(196, 26)
+        HostsToolStripMenuItem.Size = New Size(155, 22)
         HostsToolStripMenuItem.Text = "Input Devices"
         ' 
         ' CardReadersToolStripMenuItem
         ' 
         CardReadersToolStripMenuItem.Name = "CardReadersToolStripMenuItem"
-        CardReadersToolStripMenuItem.Size = New Size(180, 26)
+        CardReadersToolStripMenuItem.Size = New Size(143, 22)
         CardReadersToolStripMenuItem.Text = "Card Readers"
         ' 
         ' PrintersToolStripMenuItem
         ' 
         PrintersToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {PrintersToolStripMenuItem1, PunchesToolStripMenuItem})
         PrintersToolStripMenuItem.Name = "PrintersToolStripMenuItem"
-        PrintersToolStripMenuItem.Size = New Size(196, 26)
+        PrintersToolStripMenuItem.Size = New Size(155, 22)
         PrintersToolStripMenuItem.Text = "Output Devices"
         ' 
         ' PrintersToolStripMenuItem1
         ' 
         PrintersToolStripMenuItem1.Name = "PrintersToolStripMenuItem1"
-        PrintersToolStripMenuItem1.Size = New Size(145, 26)
+        PrintersToolStripMenuItem1.Size = New Size(119, 22)
         PrintersToolStripMenuItem1.Text = "Printers"
         ' 
         ' PunchesToolStripMenuItem
         ' 
         PunchesToolStripMenuItem.Name = "PunchesToolStripMenuItem"
-        PunchesToolStripMenuItem.Size = New Size(145, 26)
+        PunchesToolStripMenuItem.Size = New Size(119, 22)
         PunchesToolStripMenuItem.Text = "Punches"
         ' 
         ' ToolStripMenuItem2
         ' 
         ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        ToolStripMenuItem2.Size = New Size(193, 6)
+        ToolStripMenuItem2.Size = New Size(152, 6)
         ' 
         ' DefaultDevicesToolStripMenuItem
         ' 
         DefaultDevicesToolStripMenuItem.Name = "DefaultDevicesToolStripMenuItem"
-        DefaultDevicesToolStripMenuItem.Size = New Size(196, 26)
+        DefaultDevicesToolStripMenuItem.Size = New Size(155, 22)
         DefaultDevicesToolStripMenuItem.Text = "Default Devices"
         ' 
         ' ToolStripMenuItem1
         ' 
         ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        ToolStripMenuItem1.Size = New Size(154, 6)
+        ToolStripMenuItem1.Size = New Size(124, 6)
         ' 
         ' ExitToolStripMenuItem
         ' 
         ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        ExitToolStripMenuItem.Size = New Size(157, 26)
+        ExitToolStripMenuItem.Size = New Size(127, 22)
         ExitToolStripMenuItem.Text = "Exit"
         ' 
         ' dlgLoadDeck
@@ -200,15 +209,25 @@ Partial Class Form1
         dlgLoadDeck.SupportMultiDottedExtensions = True
         dlgLoadDeck.Title = "Load Deck"
         ' 
+        ' LogBox
+        ' 
+        LogBox.Location = New Point(336, 182)
+        LogBox.Name = "LogBox"
+        LogBox.Size = New Size(338, 177)
+        LogBox.TabIndex = 0
+        LogBox.Text = ""
+        ' 
         ' Form1
         ' 
-        AutoScaleDimensions = New SizeF(8F, 20F)
+        AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(784, 508)
+        ClientSize = New Size(686, 381)
+        Controls.Add(LogBox)
         Controls.Add(Panel2)
         Controls.Add(Panel1)
         Controls.Add(MenuStrip1)
         MainMenuStrip = MenuStrip1
+        Margin = New Padding(3, 2, 3, 2)
         Name = "Form1"
         Text = "Hercules Jobs"
         Panel1.ResumeLayout(False)
@@ -239,5 +258,6 @@ Partial Class Form1
     Friend WithEvents Button1 As Button
     Friend WithEvents DeckList As ListBox
     Friend WithEvents dlgLoadDeck As OpenFileDialog
+    Friend WithEvents LogBox As RichTextBox
 
 End Class
