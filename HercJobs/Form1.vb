@@ -14,7 +14,7 @@
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles Me.Load
         ' Set up an initial card reader for testing.
-        Dim newReader As New CardReader("MVS TK5 Reader", "s370", 3505)
+        Dim newReader As New CardReader("MVS TK5 Reader", "localhost", 3505)
         Readers.Add(newReader)
         UpdateReaderList()
         DeckColor = DeckList.BackColor
