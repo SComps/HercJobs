@@ -147,4 +147,14 @@ Public Class Form1
         Next
         Return NewReaders
     End Function
+
+    Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
+        Dim response As New DialogResult
+        response = MsgBox("Are you sure you want to quit?", MsgBoxStyle.YesNo Or MsgBoxStyle.Question, "End program")
+        If response = DialogResult.Yes Then
+            Me.Close()
+        Else
+            Exit Sub
+        End If
+    End Sub
 End Class

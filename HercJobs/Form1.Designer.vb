@@ -142,14 +142,14 @@ Partial Class Form1
         ' 
         ConfigureHostsToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {HostsToolStripMenuItem, PrintersToolStripMenuItem, ToolStripMenuItem2, DefaultDevicesToolStripMenuItem})
         ConfigureHostsToolStripMenuItem.Name = "ConfigureHostsToolStripMenuItem"
-        ConfigureHostsToolStripMenuItem.Size = New Size(127, 22)
+        ConfigureHostsToolStripMenuItem.Size = New Size(180, 22)
         ConfigureHostsToolStripMenuItem.Text = "Configure"
         ' 
         ' HostsToolStripMenuItem
         ' 
         HostsToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {CardReadersToolStripMenuItem})
         HostsToolStripMenuItem.Name = "HostsToolStripMenuItem"
-        HostsToolStripMenuItem.Size = New Size(155, 22)
+        HostsToolStripMenuItem.Size = New Size(180, 22)
         HostsToolStripMenuItem.Text = "Input Devices"
         ' 
         ' CardReadersToolStripMenuItem
@@ -161,42 +161,44 @@ Partial Class Form1
         ' PrintersToolStripMenuItem
         ' 
         PrintersToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {PrintersToolStripMenuItem1, PunchesToolStripMenuItem})
+        PrintersToolStripMenuItem.Enabled = False
         PrintersToolStripMenuItem.Name = "PrintersToolStripMenuItem"
-        PrintersToolStripMenuItem.Size = New Size(155, 22)
+        PrintersToolStripMenuItem.Size = New Size(180, 22)
         PrintersToolStripMenuItem.Text = "Output Devices"
         ' 
         ' PrintersToolStripMenuItem1
         ' 
         PrintersToolStripMenuItem1.Name = "PrintersToolStripMenuItem1"
-        PrintersToolStripMenuItem1.Size = New Size(119, 22)
+        PrintersToolStripMenuItem1.Size = New Size(180, 22)
         PrintersToolStripMenuItem1.Text = "Printers"
         ' 
         ' PunchesToolStripMenuItem
         ' 
         PunchesToolStripMenuItem.Name = "PunchesToolStripMenuItem"
-        PunchesToolStripMenuItem.Size = New Size(119, 22)
+        PunchesToolStripMenuItem.Size = New Size(180, 22)
         PunchesToolStripMenuItem.Text = "Punches"
         ' 
         ' ToolStripMenuItem2
         ' 
         ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        ToolStripMenuItem2.Size = New Size(152, 6)
+        ToolStripMenuItem2.Size = New Size(177, 6)
         ' 
         ' DefaultDevicesToolStripMenuItem
         ' 
+        DefaultDevicesToolStripMenuItem.Enabled = False
         DefaultDevicesToolStripMenuItem.Name = "DefaultDevicesToolStripMenuItem"
-        DefaultDevicesToolStripMenuItem.Size = New Size(155, 22)
+        DefaultDevicesToolStripMenuItem.Size = New Size(180, 22)
         DefaultDevicesToolStripMenuItem.Text = "Default Devices"
         ' 
         ' ToolStripMenuItem1
         ' 
         ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        ToolStripMenuItem1.Size = New Size(124, 6)
+        ToolStripMenuItem1.Size = New Size(177, 6)
         ' 
         ' ExitToolStripMenuItem
         ' 
         ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        ExitToolStripMenuItem.Size = New Size(127, 22)
+        ExitToolStripMenuItem.Size = New Size(180, 22)
         ExitToolStripMenuItem.Text = "Exit"
         ' 
         ' dlgLoadDeck
