@@ -31,99 +31,107 @@ Partial Class frmReader
         Label3 = New Label()
         cmdRemove = New Button()
         cmdSave = New Button()
-        cmdCancel = New Button()
+        cmdClose = New Button()
         SuspendLayout()
         ' 
         ' lstReaders
         ' 
         lstReaders.FormattingEnabled = True
+        lstReaders.ItemHeight = 15
         lstReaders.Items.AddRange(New Object() {"<add new reader>"})
-        lstReaders.Location = New Point(12, 12)
+        lstReaders.Location = New Point(10, 9)
+        lstReaders.Margin = New Padding(3, 2, 3, 2)
         lstReaders.Name = "lstReaders"
-        lstReaders.Size = New Size(218, 164)
+        lstReaders.Size = New Size(191, 124)
         lstReaders.TabIndex = 0
         ' 
         ' txtHost
         ' 
-        txtHost.Location = New Point(16, 270)
+        txtHost.Location = New Point(14, 202)
+        txtHost.Margin = New Padding(3, 2, 3, 2)
         txtHost.Name = "txtHost"
-        txtHost.Size = New Size(250, 27)
+        txtHost.Size = New Size(219, 23)
         txtHost.TabIndex = 1
         ' 
         ' txtPort
         ' 
-        txtPort.Location = New Point(272, 270)
+        txtPort.Location = New Point(238, 202)
+        txtPort.Margin = New Padding(3, 2, 3, 2)
         txtPort.Name = "txtPort"
-        txtPort.Size = New Size(79, 27)
+        txtPort.Size = New Size(70, 23)
         txtPort.TabIndex = 2
         ' 
         ' txtFriendly
         ' 
-        txtFriendly.Location = New Point(16, 212)
+        txtFriendly.Location = New Point(14, 159)
+        txtFriendly.Margin = New Padding(3, 2, 3, 2)
         txtFriendly.Name = "txtFriendly"
-        txtFriendly.Size = New Size(250, 27)
+        txtFriendly.Size = New Size(219, 23)
         txtFriendly.TabIndex = 3
         ' 
         ' Label1
         ' 
         Label1.AutoSize = True
-        Label1.Location = New Point(16, 189)
+        Label1.Location = New Point(14, 142)
         Label1.Name = "Label1"
-        Label1.Size = New Size(102, 20)
+        Label1.Size = New Size(82, 15)
         Label1.TabIndex = 4
         Label1.Text = "Friendly name"
         ' 
         ' Label2
         ' 
         Label2.AutoSize = True
-        Label2.Location = New Point(16, 247)
+        Label2.Location = New Point(14, 185)
         Label2.Name = "Label2"
-        Label2.Size = New Size(129, 20)
+        Label2.Size = New Size(102, 15)
         Label2.TabIndex = 5
         Label2.Text = "Host or IP address"
         ' 
         ' Label3
         ' 
         Label3.AutoSize = True
-        Label3.Location = New Point(272, 247)
+        Label3.Location = New Point(238, 185)
         Label3.Name = "Label3"
-        Label3.Size = New Size(35, 20)
+        Label3.Size = New Size(29, 15)
         Label3.TabIndex = 6
         Label3.Text = "Port"
         ' 
         ' cmdRemove
         ' 
-        cmdRemove.Location = New Point(272, 12)
+        cmdRemove.Location = New Point(238, 9)
+        cmdRemove.Margin = New Padding(3, 2, 3, 2)
         cmdRemove.Name = "cmdRemove"
-        cmdRemove.Size = New Size(94, 29)
+        cmdRemove.Size = New Size(82, 22)
         cmdRemove.TabIndex = 7
         cmdRemove.Text = "Remove"
         cmdRemove.UseVisualStyleBackColor = True
         ' 
         ' cmdSave
         ' 
-        cmdSave.Location = New Point(272, 56)
+        cmdSave.Location = New Point(238, 42)
+        cmdSave.Margin = New Padding(3, 2, 3, 2)
         cmdSave.Name = "cmdSave"
-        cmdSave.Size = New Size(94, 29)
+        cmdSave.Size = New Size(82, 22)
         cmdSave.TabIndex = 8
         cmdSave.Text = "Save"
         cmdSave.UseVisualStyleBackColor = True
         ' 
-        ' cmdCancel
+        ' cmdClose
         ' 
-        cmdCancel.Location = New Point(272, 91)
-        cmdCancel.Name = "cmdCancel"
-        cmdCancel.Size = New Size(94, 29)
-        cmdCancel.TabIndex = 9
-        cmdCancel.Text = "Close"
-        cmdCancel.UseVisualStyleBackColor = True
+        cmdClose.Location = New Point(238, 68)
+        cmdClose.Margin = New Padding(3, 2, 3, 2)
+        cmdClose.Name = "cmdClose"
+        cmdClose.Size = New Size(82, 22)
+        cmdClose.TabIndex = 9
+        cmdClose.Text = "Close"
+        cmdClose.UseVisualStyleBackColor = True
         ' 
         ' frmReader
         ' 
-        AutoScaleDimensions = New SizeF(8F, 20F)
+        AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(419, 309)
-        Controls.Add(cmdCancel)
+        ClientSize = New Size(367, 232)
+        Controls.Add(cmdClose)
         Controls.Add(cmdSave)
         Controls.Add(cmdRemove)
         Controls.Add(Label3)
@@ -133,6 +141,7 @@ Partial Class frmReader
         Controls.Add(txtPort)
         Controls.Add(txtHost)
         Controls.Add(lstReaders)
+        Margin = New Padding(3, 2, 3, 2)
         Name = "frmReader"
         StartPosition = FormStartPosition.CenterParent
         Text = "3505 Card readers"
@@ -149,5 +158,5 @@ Partial Class frmReader
     Friend WithEvents Label3 As Label
     Friend WithEvents cmdRemove As Button
     Friend WithEvents cmdSave As Button
-    Friend WithEvents cmdCancel As Button
+    Friend WithEvents cmdClose As Button
 End Class

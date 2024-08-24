@@ -1,4 +1,7 @@
-﻿Public Class Form1
+﻿Imports System.Diagnostics.Metrics
+Imports System.Xml.Serialization
+
+Public Class Form1
 
     Public Shared Readers As New List(Of CardReader)
     Private RunningReader As CardReader
@@ -9,16 +12,24 @@
         ' Open the card reader configuration form
         Dim ReaderForm As New frmReader
         Dim result As DialogResult = ReaderForm.ShowDialog()
+        If result = DialogResult.OK Then
+            SaveReaders()
+        End If
         UpdateReaderList()
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles Me.Load
+        AppendLog("Log starting")
         ' Set up an initial card reader for testing.
-        Dim newReader As New CardReader("MVS TK5 Reader", "localhost", 3505)
-        Readers.Add(newReader)
+        'Dim newReader As New CardReader("MVS TK5 Reader", "localhost", 3505)
+        'Readers.Add(newReader)
+        If IO.File.Exists("readers.xml") Then
+            'There's already a saved list of readers
+            Readers = LoadReaders()
+        End If
         UpdateReaderList()
         DeckColor = DeckList.BackColor
-        AppendLog("Log starting")
+
     End Sub
 
     Private Sub UpdateReaderList()
@@ -26,7 +37,9 @@
         For Each r As CardReader In Readers
             SelectedReader.Items.Add(r.FriendlyName)
         Next
-        SelectedReader.SelectedIndex = 0
+        If Readers.Count > 0 Then
+            SelectedReader.SelectedIndex = 0
+        End If
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -48,10 +61,13 @@
             DeckList.BackColor = DeckColor
             RunStop.Text = "Pause"
             AppendLog("Starting readers.")
+            ' Check the queue in case something was added while we were stopped.
+            CheckQueue()
         End If
     End Sub
 
     Private Sub CheckQueue()
+        If AllReaderStop Then Exit Sub                    ' Readers are stopped.
         Dim jobsWaiting As Integer = DeckList.Items.Count
         If jobsWaiting = 0 Then
             Exit Sub
@@ -99,4 +115,36 @@
         LogBox.AppendText(Now.ToShortDateString & " " & txt & vbCrLf)
         LogBox.ScrollToCaret()
     End Sub
+
+    Private Sub SaveReaders()
+        Dim currentConf As New List(Of ReaderConfig)
+        For Each r In Readers
+            Dim thisRC As New ReaderConfig
+            thisRC.Name = r.FriendlyName
+            thisRC.Host = r.Host
+            thisRC.Port = r.Port
+            currentConf.Add(thisRC)
+        Next
+        Dim serializer As New XmlSerializer(GetType(List(Of ReaderConfig)), New XmlRootAttribute("CardReaders"))
+        Using file As System.IO.FileStream = System.IO.File.Open("readers.xml", IO.FileMode.OpenOrCreate, IO.FileAccess.Write)
+            serializer.Serialize(file, currentConf)
+        End Using
+    End Sub
+
+    Private Function LoadReaders() As List(Of CardReader)
+        Dim serializer As New XmlSerializer(GetType(List(Of ReaderConfig)), New XmlRootAttribute("CardReaders"))
+        Dim deserialized As List(Of ReaderConfig) = Nothing
+        Using file = System.IO.File.OpenRead("readers.xml")
+            deserialized = DirectCast(serializer.Deserialize(file), List(Of ReaderConfig))
+        End Using
+        Dim NewReaders As New List(Of CardReader)
+        For Each c As ReaderConfig In deserialized
+            Dim thisCR As New CardReader
+            thisCR.FriendlyName = c.Name
+            thisCR.Host = c.Host
+            thisCR.Port = c.Port
+            NewReaders.Add(thisCR)
+        Next
+        Return NewReaders
+    End Function
 End Class

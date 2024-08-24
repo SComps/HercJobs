@@ -4,8 +4,8 @@
     Dim CurrentFriendlyName As String = "" 'Holds the original FriendlyName in case the user changes it
     'and we need to know which object to change
 
-    Private Sub cmdCancel_Click(sender As Object, e As EventArgs) Handles cmdCancel.Click
-        Me.DialogResult = DialogResult.Cancel
+    Private Sub cmdClose_Click(sender As Object, e As EventArgs) Handles cmdClose.Click
+        Me.DialogResult = DialogResult.OK
         Me.Close()
     End Sub
 
@@ -47,6 +47,7 @@
         For Each r As CardReader In Form1.Readers
             lstReaders.Items.Add(r.FriendlyName)
         Next
+
     End Sub
 
     Private Sub lstReaders_Rebuild()
