@@ -157,4 +157,10 @@ Public Class Form1
             Exit Sub
         End If
     End Sub
+
+    Private Sub PrintersToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PrintersToolStripMenuItem.Click
+        Dim prtConfig As New frmPrinter
+        Dim result As New DialogResult
+        result = prtConfig.ShowDialog
+    End Sub
 End Class
