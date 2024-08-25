@@ -5,6 +5,7 @@ Public Class Form1
 
     Public Shared Readers As New List(Of CardReader)
     Private RunningReader As CardReader
+    Public Shared Outputs As New List(Of OutputDevice)
     Private AllReaderStop As Boolean = False
     Private DeckColor As Color
 
