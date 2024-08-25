@@ -33,4 +33,8 @@
     <Folder Include="Resources\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="PDFsharp" Version="6.2.0-preview-1" />
+  </ItemGroup>
+
 </Project>
