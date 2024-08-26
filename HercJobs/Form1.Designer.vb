@@ -23,6 +23,7 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Panel1 = New Panel()
+        btnQueue = New Button()
         RunStop = New Button()
         Button1 = New Button()
         DeckList = New ListBox()
@@ -53,6 +54,7 @@ Partial Class Form1
         ' 
         Panel1.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
         Panel1.BorderStyle = BorderStyle.FixedSingle
+        Panel1.Controls.Add(btnQueue)
         Panel1.Controls.Add(RunStop)
         Panel1.Controls.Add(Button1)
         Panel1.Controls.Add(DeckList)
@@ -63,6 +65,15 @@ Partial Class Form1
         Panel1.Name = "Panel1"
         Panel1.Size = New Size(320, 421)
         Panel1.TabIndex = 0
+        ' 
+        ' btnQueue
+        ' 
+        btnQueue.Location = New Point(199, 385)
+        btnQueue.Name = "btnQueue"
+        btnQueue.Size = New Size(96, 23)
+        btnQueue.TabIndex = 3
+        btnQueue.Text = "Reader Queue"
+        btnQueue.UseVisualStyleBackColor = True
         ' 
         ' RunStop
         ' 
@@ -247,7 +258,6 @@ Partial Class Form1
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(686, 475)
-        ControlBox = False
         Controls.Add(LogBox)
         Controls.Add(Panel2)
         Controls.Add(Panel1)
@@ -291,5 +301,6 @@ Partial Class Form1
     Friend WithEvents OutputList As ListBox
     Friend WithEvents Label2 As Label
     Friend WithEvents Button2 As Button
+    Friend WithEvents btnQueue As Button
 
 End Class

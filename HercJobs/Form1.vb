@@ -6,7 +6,7 @@ Public Class Form1
     Public Shared Readers As New List(Of CardReader)
     Private RunningReader As CardReader
     Public Shared Outputs As New List(Of OutputDevice)
-    Private AllReaderStop As Boolean = False
+    Public AllReaderStop As Boolean = False
     Private DeckColor As Color
 
     Private Sub CardReadersToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CardReadersToolStripMenuItem.Click
@@ -76,6 +76,12 @@ Public Class Form1
             Dim jobFile As String = DeckList.Items(0)
             AppendLog("Sending " & jobFile)
             RunningReader.SendJob(jobFile)
+            'Wait 2 seconds
+            AppendLog("Waiting 2 seconds for reader to settle.")
+            Dim StartTime As DateTime = Now()
+            Do Until Now() >= StartTime.AddSeconds(2)
+                Application.DoEvents()
+            Loop
             AppendLog("Success.")
             DeckList.Items.RemoveAt(0)
             CheckQueue()
@@ -163,5 +169,11 @@ Public Class Form1
         Dim prtConfig As New frmPrinter
         Dim result As New DialogResult
         result = prtConfig.ShowDialog
+    End Sub
+
+    Private Sub btnQueue_Click(sender As Object, e As EventArgs) Handles btnQueue.Click
+        Dim viewQueue As New frmQueue
+        Dim result As New DialogResult
+        result = viewQueue.ShowDialog
     End Sub
 End Class

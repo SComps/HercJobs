@@ -1,6 +1,7 @@
 ﻿Imports System.IO
 Imports System.Net.Sockets
 Imports System.Text
+Imports System.Windows.Forms.VisualStyles
 
 Public Class CardReader
     'Hercules 3505 card reader connection
@@ -74,8 +75,14 @@ Public Class CardReader
                 Return False
             End Try
         Next
-        jobStream.Close()
 
+        If myClient.GetStream() IsNot Nothing Then
+            myClient.GetStream().Close()
+        End If
+        myClient.Close()
+        If myClient.Connected = True Then
+            Stop
+        End If
         Return True
     End Function
 
