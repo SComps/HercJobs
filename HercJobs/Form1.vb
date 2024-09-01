@@ -131,7 +131,8 @@ Public Class Form1
     End Sub
 
     Private Sub AppendLog(txt As String)
-        LogBox.AppendText(Now.ToShortDateString & " " & txt & vbCrLf)
+        Dim txtfmt As String = "** {0}" & vbCrLf
+        LogBox.AppendText(String.Format(txtfmt, txt))
         LogBox.ScrollToCaret()
     End Sub
 
@@ -189,7 +190,9 @@ Public Class Form1
         result = viewQueue.ShowDialog
     End Sub
 
-    Public Sub GotOutput(outList As List(Of String))
+    Public Sub GotOutput(sender As OutputDevice, outList As List(Of String))
+        Dim txtFmt As String = "Received {0} lines of output for {1}"
+        AppendLog(String.Format(txtFmt, outList.Count, sender.FriendlyName))
         Dim po As New frmPrintJob
         po.OutList = outList
         po.Show()

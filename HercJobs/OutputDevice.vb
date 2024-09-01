@@ -14,7 +14,7 @@ Public Class OutputDevice
     Dim myClient As New TcpClient()
     Private WithEvents myTimer As New Timer
 
-    Event JobReceived(outList As List(Of String))
+    Event JobReceived(sender As Object, outList As List(Of String))
 
     ' Even though we don't set up a Name, host or port, The default is going to be a printer via sockdev
     ' which is likely to be the most common.
@@ -170,7 +170,7 @@ Public Class OutputDevice
         Dim myJob As List(Of String) = GetOutput()
         If myJob.Count > 0 Then
             ' A job has been printed.  It might be ours, it might not.
-            RaiseEvent JobReceived(myJob)
+            RaiseEvent JobReceived(Me, myJob)
         End If
         myTimer.Enabled = True
     End Sub
