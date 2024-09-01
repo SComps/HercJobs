@@ -5,9 +5,10 @@ Public Class Form1
 
     Public Shared Readers As New List(Of CardReader)
     Private RunningReader As CardReader
-    Public Shared Outputs As New List(Of OutputDevice)
+    Friend WithEvents Outputs As New List(Of OutputDevice)
     Public AllReaderStop As Boolean = False
     Private DeckColor As Color
+
 
     Private Sub CardReadersToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CardReadersToolStripMenuItem.Click
         ' Open the card reader configuration form
@@ -21,16 +22,27 @@ Public Class Form1
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles Me.Load
         AppendLog("Log starting")
-        ' Set up an initial card reader for testing.
-        'Dim newReader As New CardReader("MVS TK5 Reader", "localhost", 3505)
-        'Readers.Add(newReader)
+        'Check if there's readers defined.  If so, load them.
         If IO.File.Exists("readers.xml") Then
             'There's already a saved list of readers
             Readers = LoadReaders()
         End If
         UpdateReaderList()
         DeckColor = DeckList.BackColor
-
+        Dim newDev As New OutputDevice
+        newDev.Host = "s370"
+        newDev.Port = 1405
+        newDev.Is3525 = False
+        newDev.Is1403 = True
+        newDev.AutoPrint = False
+        newDev.FriendlyName = "S370 PRINTER 4"
+        newDev.PollFiles = False
+        Outputs.Add(newDev)
+        newDev = Nothing
+        Dim myDev As OutputDevice = Outputs.Item(0)
+        myDev.Connect()
+        AppendLog("Connected to " & myDev.FriendlyName)
+        AddHandler myDev.JobReceived, AddressOf GotOutput
     End Sub
 
     Private Sub UpdateReaderList()
@@ -175,5 +187,11 @@ Public Class Form1
         Dim viewQueue As New frmQueue
         Dim result As New DialogResult
         result = viewQueue.ShowDialog
+    End Sub
+
+    Public Sub GotOutput(outList As List(Of String))
+        Dim po As New frmPrintJob
+        po.OutList = outList
+        po.Show()
     End Sub
 End Class
