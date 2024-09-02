@@ -1,6 +1,7 @@
 ﻿Imports System.IO
 Imports System.Net.Sockets
 Imports System.Text
+Imports System.Threading
 Imports System.Windows.Forms.VisualStyles
 
 Public Class CardReader
@@ -8,6 +9,7 @@ Public Class CardReader
     Dim myName As String = "Card Reader"
     Dim myHost As String = ""
     Dim myPort As Integer = 3505
+    Dim sendOk As Boolean = False
 
     Public myClient As TcpClient
     Public Property FriendlyName As String
@@ -48,10 +50,20 @@ Public Class CardReader
         myPort = port
     End Sub
 
-    Public Function SendJob(fileName As String) As Boolean
+    Public Function SendJob(filename As String) As Boolean
+        ' Trying this method of sending the job as a separate thread.
+        sendOk = False
+        Debug.Print("Starting send job thread.")
+        Dim newThread As New Thread(AddressOf SendJob2)
+        newThread.Start(filename)
+        Debug.Print("Thread stopped.")
+        Return sendOk
+    End Function
+
+    Public Sub SendJob2(fileName As String)
         ' Sends deck to this object's port.
         ' If it succeeds sending (not to be confused with executed on the guest) return True
-        ' otherwise return false.
+        ' otherwise return false in sendOk
         Dim thisDeck As New StreamReader(fileName)
         Dim deck As New List(Of String)
         Dim thisLine As String = ""
@@ -62,7 +74,8 @@ Public Class CardReader
         thisDeck.Close()
         Dim jobStream As NetworkStream = Connect(myHost, myPort)
         If jobStream Is Nothing Then
-            Return False
+            sendOk = False
+            Exit Sub
         End If
 
         For Each l As String In deck
@@ -72,7 +85,8 @@ Public Class CardReader
                 jobStream.Write(lineBytes)
             Catch ex As Exception
                 jobStream.Close()
-                Return False
+                sendOk = False
+                Exit Sub
             End Try
         Next
 
@@ -80,11 +94,8 @@ Public Class CardReader
             myClient.GetStream().Close()
         End If
         myClient.Close()
-        If myClient.Connected = True Then
-            Stop
-        End If
-        Return True
-    End Function
+        sendOk = True
+    End Sub
 
     Private Function Connect(host As String, port As Integer) As NetworkStream
         ' Connect to the remote port, and return the network stream if successful
