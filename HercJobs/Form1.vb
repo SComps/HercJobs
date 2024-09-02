@@ -1,5 +1,6 @@
 ﻿Imports System.Diagnostics.Metrics
 Imports System.Reflection.Metadata
+Imports System.Text.RegularExpressions
 Imports System.Windows.Forms.Design
 Imports System.Xml
 Imports System.Xml.Schema
@@ -40,20 +41,20 @@ Public Class Form1
         If System.IO.File.Exists("outputs.xml") Then
             Outputs = LoadOutputs()
         End If
-        'Dim newDev As New OutputDevice
-        'newDev.Host = "s370"
-        'newDev.Port = 1405
-        'newDev.Is3525 = False
-        'newDev.Is1403 = True
-        'newDev.AutoPrint = False
-        'newDev.FriendlyName = "S370 PRINTER 4"
-        'newDev.PollFiles = False
-        'Outputs.Add(newDev)
-        'newDev = Nothing
-        'Dim myDev As OutputDevice = Outputs.Item(0)
-        'myDev.Connect()
-        'AppendLog("Connected to " & myDev.FriendlyName)
-        'AddHandler myDev.JobReceived, AddressOf GotOutput
+        Dim newDev As New OutputDevice
+        newDev.Host = "s370"
+        newDev.Port = 1405
+        newDev.Is3525 = False
+        newDev.Is1403 = True
+        newDev.AutoPrint = False
+        newDev.FriendlyName = "S370 PRINTER 4"
+        newDev.PollFiles = False
+        Outputs.Add(newDev)
+        newDev = Nothing
+        Dim myDev As OutputDevice = Outputs.Item(0)
+        myDev.Connect()
+        AppendLog("Connected to " & myDev.FriendlyName)
+        AddHandler myDev.JobReceived, AddressOf GotOutput
     End Sub
 
     Private Sub UpdateReaderList()
@@ -251,7 +252,7 @@ Public Class Form1
         outList = Paginate(outList) 'Paginate if for PDF output
         po.Show()
         Dim outputFile As String = CreatePDF(sender.FriendlyName, outList, outputGUID)
-        AppendLog("Saved output to " & outputfile)
+        AppendLog("Saved output to " & outputFile)
     End Sub
 
     Public Function CreatePDF(title As String, outList As List(Of String), fileguid As String) As String
@@ -280,9 +281,10 @@ Public Class Form1
 
         For Each line As String In outList
             ' TODO:I'm using a class E printer, will need to get a bit more intelligent with this.
-            If line.Trim.StartsWith("****E   END") Then
+            Dim pattern = "^\*\*\*\*[A-Z0-9]\ \ \ END"
+            Dim match = Regex.IsMatch(line.Trim, pattern)
+            If match Then
                 Dim largs As String() = line.Split(" ")
-
                 JobNumber = largs(9)
                 JobName = largs(11)
             End If
@@ -318,7 +320,7 @@ Public Class Form1
         Next
         Dim outputFile As String = fileguid & ".pdf"
         If JobName <> "" And JobNumber <> "" Then
-            outputFile = String.Format("JOB-{0}-{1}.pdf", JobNumber, JobName)
+            outputFile = String.Format("{0}-{1}-{2}.pdf", title, JobNumber, JobName)
         End If
         doc.Save(outputFile)
         doc.Close()
