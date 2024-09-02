@@ -36,20 +36,24 @@ Public Class Form1
         End If
         UpdateReaderList()
         DeckColor = DeckList.BackColor
-        Dim newDev As New OutputDevice
-        newDev.Host = "s370"
-        newDev.Port = 1405
-        newDev.Is3525 = False
-        newDev.Is1403 = True
-        newDev.AutoPrint = False
-        newDev.FriendlyName = "S370 PRINTER 4"
-        newDev.PollFiles = False
-        Outputs.Add(newDev)
-        newDev = Nothing
-        Dim myDev As OutputDevice = Outputs.Item(0)
-        myDev.Connect()
-        AppendLog("Connected to " & myDev.FriendlyName)
-        AddHandler myDev.JobReceived, AddressOf GotOutput
+        'Check for any outputs are defined.  If so, load them.
+        If System.IO.File.Exists("outputs.xml") Then
+            Outputs = LoadOutputs()
+        End If
+        'Dim newDev As New OutputDevice
+        'newDev.Host = "s370"
+        'newDev.Port = 1405
+        'newDev.Is3525 = False
+        'newDev.Is1403 = True
+        'newDev.AutoPrint = False
+        'newDev.FriendlyName = "S370 PRINTER 4"
+        'newDev.PollFiles = False
+        'Outputs.Add(newDev)
+        'newDev = Nothing
+        'Dim myDev As OutputDevice = Outputs.Item(0)
+        'myDev.Connect()
+        'AppendLog("Connected to " & myDev.FriendlyName)
+        'AddHandler myDev.JobReceived, AddressOf GotOutput
     End Sub
 
     Private Sub UpdateReaderList()
@@ -275,6 +279,7 @@ Public Class Form1
         Dim currentLine As Integer = 0
 
         For Each line As String In outList
+            ' TODO:I'm using a class E printer, will need to get a bit more intelligent with this.
             If line.Trim.StartsWith("****E   END") Then
                 Dim largs As String() = line.Split(" ")
 
@@ -327,8 +332,6 @@ Public Class Form1
     End Function
 
     Private Function Paginate(inp As List(Of String)) As List(Of String)
-
-
         'What we're looking for here is vbFormFeed.  When we see this, we start a new line
         'put the vbFormFeed on it's own line (without vbLF or vbCR)
         'To do this, we have to examine each line character by character because occassionally
@@ -371,8 +374,6 @@ Public Class Form1
                 newList.Add(thisLine)
             End If
         Next
-        ' If the last line is a form feed, don't send it.  PDF will deal with the final ff on it's own
-
         Return newList
     End Function
 End Class
